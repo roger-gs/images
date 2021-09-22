@@ -1,0 +1,118 @@
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html
+
+[mysqld]
+#
+# Remove leading # and set to the amount of RAM for the most important data
+# cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+# innodb_buffer_pool_size = 128M
+#
+# Remove leading # to turn on a very important data integrity option: logging
+# changes to the binary log between backups.
+# log_bin
+#
+# Remove leading # to set options mainly useful for reporting servers.
+# The server defaults are faster for transactions and fast SELECTs.
+# Adjust sizes as needed, experiment to find the optimal values.
+# join_buffer_size = 128M
+# sort_buffer_size = 2M
+# read_rnd_buffer_size = 2M
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+slow_query_log=ON
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+server-id=1
+skip_name_resolve=on
+log-bin=mysql-bin
+max_connections=2000
+replicate-ignore-db=information_schema
+replicate-ignore-db=mysql
+replicate-ignore-db=performance_schema
+replicate-ignore-db=sys
+#low_query_log=ON
+binlog-ignore-db=information_schema
+binlog-ignore-db=mysql
+binlog-ignore-db=performance_schema
+binlog-ignore-db=sys
+
+master_info_repository = table
+
+relay_log_info_repository = table
+
+auto-increment-increment = 3
+
+auto-increment-offset = 1
+
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER
+gtid-mode=on
+enforce-gtid-consistency = ON
+
+lower_case_table_names=1
+character_set_server=utf8mb4
+event_scheduler=ON
+innodb-status-file=1
+innodb_write_io_threads =4 #默认为4
+innodb_read_io_threads =4 #默认为4
+innodb_io_capacity_max = 10000
+innodb_io_capacity = 5000 #默认200
+innodb_file_format=barracuda
+innodb_large_prefix =1
+innodb_print_all_deadlocks=on
+innodb_flush_log_at_trx_commit = 1
+innodb_flush_method=O_DIRECT
+innodb_log_files_in_group = 3
+innodb_log_file_size = 1024M
+innodb_log_checksums =1
+innodb_flush_neighbors=0
+innodb_page_cleaners = 4
+innodb_adaptive_flushing =1
+innodb_sort_buffer_size =4M
+innodb_thread_concurrency = 64
+innodb_buffer_pool_chunk_size =128M
+innodb_data_file_path = ibdata1:10M:autoextend
+innodb_buffer_pool_instances =8
+transaction-isolation=READ-COMMITTED
+innodb_rollback_on_timeout=1
+innodb_lock_wait_timeout = 120
+binlog_rows_query_log_events =1
+log_bin_trust_function_creators =1
+expire_logs_days=10
+binlog_format = row
+binlog_stmt_cache_size=2M
+binlog_cache_size = 2M
+log_slow_admin_statements =1
+#log_queries_not_using_indexes=1
+bulk_insert_buffer_size  = 0
+join_buffer_size=16M
+myisam_sort_buffer_size =4096
+skip-host-cache
+skip-character-set-client-handshake
+table_definition_cache=2048
+table_open_cache = 2048
+default-time-zone=+8:00   #time_zone
+log_timestamps=system   #默认是utc
+show_compatibility_56=on
+sync_binlog= 1
+secure_file_priv=    ##数据库导出导入限制
+innodb_table_locks =0
+local_infile=0
+tmp_table_size = 512M
+max_connect_errors = 10000
+back_log = 5000
+#innodb_file_per_table=1
+key_buffer_size=512M
+innodb_buffer_pool_size=200G
+innodb_log_buffer_size=32M
+read_buffer_size=4M
+sort_buffer_size=32M
+read_rnd_buffer_size=64M
+thread_cache_size=128
+query_cache_type=1
+query_cache_size=512M
+query_cache_limit=10M
+max_allowed_packet=256M
+master-info-repository=table
+relay-log-info-repository=table
